@@ -5,7 +5,7 @@ export default function Profile() {
     <Card>
       <Avatar
         size={200}
-        person='YfeOqp2'
+        person={{name: 'whotao', imageId:'YfeOqp2'}}
       />
       <Avatar
         size={100}
@@ -19,12 +19,17 @@ export default function Profile() {
   );
 }
 
-function Avatar({ person, size }: { person: string, size: number }) {
+type Person = { name: string, imageId: string } | string;
+
+function Avatar({ person, size }: { person: Person, size: number }) {
+  // 画像のURLを取得するために、personがオブジェクトか文字列かを確認します
+  const imageUrl = typeof person === 'string' ? getImageUrl(person) : getImageUrl(person.imageId);
+
   return (
     <img
       className="avatar"
-      src={getImageUrl(person)}
-      alt={person}
+      src={imageUrl}
+      alt={typeof person === 'string' ? person : person.name}
       width={size}
       height={size}
     />
