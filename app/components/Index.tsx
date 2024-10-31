@@ -1,18 +1,42 @@
-import { NextPage } from 'next';
-import { useEffect, useState } from 'react';
+import { GetServerSideProps, NextPage } from 'next';
+import { useState } from 'react';
 
-const Index: NextPage = () => {
-  const [imageUrl, setImageUrl] = useState("");
-  const [loading, setLoading] = useState(true);
-  useEffect(() => {
-    fetchImage().then((image) => {
-      setImageUrl(image.url);
-      setLoading(false);
-    });
-  }, []);
-  return <div>{loading || <img src={imageUrl}/>}</div>;
+type Props = {
+  initialImageUrl: string;
+};
+
+const Index: NextPage<Props> = ({ initialImageUrl }) => {
+  const [imageUrl, setImageUrl] = useState(initialImageUrl);
+  const [loading, setLoading] = useState(false);
+  // useEffect(() => {
+  //   fetchImage().then((image) => {
+  //     setImageUrl(image.url);
+  //     setLoading(false);
+  //   });
+  // }, []);
+  const handleClick = async () => {
+    setLoading(true);
+    const newImage = await fetchImage();
+    setImageUrl(newImage.url);
+    setLoading(false);
+  };
+  return (
+  <div>
+    <button onClick={handleClick}>New Image</button>
+    <div>{loading || <img src={imageUrl} />}</div>
+  </div>
+  );
 };
 export default Index;
+
+export const getServerSideProps: GetServerSideProps<Props> = async () => {
+  const image = await fetchImage();
+  return {
+    props: {
+      initialImageUrl: image.url,
+    },
+  };
+};
 
 type Image = {
   url: string;

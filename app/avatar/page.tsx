@@ -7,7 +7,7 @@ import { getImageUrl } from './utils'
 export default function Profile() {
   return (
     <Card>
-      <Index />
+      <Index initialImageUrl="example-url" />
       <Avatar
         size={200}
         person={{name: 'whotao', imageId:'YfeOqp2'}}
