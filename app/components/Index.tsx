@@ -1,19 +1,21 @@
 import { GetServerSideProps, NextPage } from 'next';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 type Props = {
   initialImageUrl: string;
 };
 
-const Index: NextPage<Props> = ({ initialImageUrl }) => {
-  const [imageUrl, setImageUrl] = useState(initialImageUrl);
-  const [loading, setLoading] = useState(false);
-  // useEffect(() => {
-  //   fetchImage().then((image) => {
-  //     setImageUrl(image.url);
-  //     setLoading(false);
-  //   });
-  // }, []);
+// ページ初期画像取得、useEffectを使用するかどうか
+const Index: NextPage<Props> = () => {
+  const [imageUrl, setImageUrl] = useState('');
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    fetchImage().then((image) => {
+      setImageUrl(image.url);
+      setLoading(false);
+    });
+  }, []);
+
   const handleClick = async () => {
     setLoading(true);
     const newImage = await fetchImage();
@@ -61,4 +63,4 @@ const fetchImage = async (): Promise<Image> => {
     }
     return "url" in value && typeof value["url"] === 'string';
   };
-fetchImage();
+// fetchImage();

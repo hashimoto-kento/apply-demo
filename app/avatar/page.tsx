@@ -8,6 +8,7 @@ export default function Profile() {
   return (
     <Card>
       <Index initialImageUrl="example-url" />
+      <LikeButton />
       <Avatar
         size={200}
         person={{name: 'whotao', imageId:'YfeOqp2'}}
