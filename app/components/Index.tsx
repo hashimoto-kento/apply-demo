@@ -1,5 +1,6 @@
 import { GetServerSideProps, NextPage } from 'next';
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
 
 type Props = {
   initialImageUrl: string;
@@ -25,7 +26,7 @@ const Index: NextPage<Props> = () => {
   return (
   <div>
     <button onClick={handleClick}>New Image</button>
-    <div>{loading || <img src={imageUrl} />}</div>
+    <div>{loading || <Image src={imageUrl} alt='click the change image' />}</div>
   </div>
   );
 };

@@ -11,7 +11,7 @@ const person = {
 export function TodoList() {
   return (
     <div style={person.theme}>
-      <h1>{person.name}'s Todos</h1>
+      <h1>{person.name}s Todos</h1>
       <Image
         className="avatar"
         src="https://i.imgur.com/7vQD0fPs.jpg"
