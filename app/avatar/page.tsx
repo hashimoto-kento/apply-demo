@@ -1,6 +1,7 @@
 'use client';
 
 import Index from '../components/Index';
+import Image from 'next/image';
 import { LikeButton } from '../components/LikeButton';
 import { getImageUrl } from './utils'
 
@@ -35,7 +36,7 @@ function Avatar({ person, size }: { person: Person, size: number }) {
   const imageUrl = typeof person === 'string' ? getImageUrl(person) : getImageUrl(person.imageId);
 
   return (
-    <img
+    <Image
       className="avatar"
       src={imageUrl}
       alt={typeof person === 'string' ? person : person.name}

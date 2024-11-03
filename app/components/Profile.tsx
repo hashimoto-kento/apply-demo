@@ -1,6 +1,8 @@
+import Image from 'next/image';
+
 export default function Profile() {
   return (
-    <img
+    <Image
       src="https://i.imgur.com/8Km9tLL.png"
       alt="Profile"
       />
